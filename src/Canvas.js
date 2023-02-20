@@ -50,7 +50,8 @@ function Canvas() {
     if (lastMouseRef.current) {
       const rect = getRectFromPoints(mouseRef.current, lastMouseRef.current);
 
-      if (rect) {
+      if (rect && rect.width > 0 && rect.height > 0) {
+        // check if a valid rectangle is being drawn
         setRectangles([...rectangles, { ...rect, text: "" }]);
       }
     }
