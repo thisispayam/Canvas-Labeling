@@ -47,14 +47,16 @@ function Canvas() {
     e.preventDefault();
     mousedownRef.current = false;
 
-    const rect = getRectFromPoints(mouseRef.current, lastMouseRef.current || mouseRef.current);
+    if (lastMouseRef.current) {
+      const rect = getRectFromPoints(mouseRef.current, lastMouseRef.current);
 
-    if (rect) {
-      setRectangles([...rectangles, { ...rect, text: "" }]);
+      if (rect) {
+        setRectangles([...rectangles, { ...rect, text: "" }]);
+      }
     }
 
     lastMouseRef.current = null;
-    setDrawingRect(null);
+    setDrawingRect(false);
   };
 
   const getRectFromPoints = (start, end) => {
