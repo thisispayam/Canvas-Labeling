@@ -7,6 +7,7 @@ function Canvas() {
   const [rectangles, setRectangles] = useState([]);
   const [selected, setSelected] = useState(-1);
   const [canvasReady, setCanvasReady] = useState(false);
+  const [drawingRect, setDrawingRect] = useState(null);
 
   const canvasRef = useRef();
   const mouseRef = useRef({ x: 0, y: 0 });
@@ -38,6 +39,8 @@ function Canvas() {
       x: e.nativeEvent.offsetX,
       y: e.nativeEvent.offsetY
     };
+
+    setDrawingRect(getRectFromPoints(mouseRef.current, lastMouseRef.current));
   };
 
   const handleMouseUp = e => {
@@ -51,6 +54,7 @@ function Canvas() {
     }
 
     lastMouseRef.current = null;
+    setDrawingRect(null);
   };
 
   const getRectFromPoints = (start, end) => {
@@ -140,10 +144,21 @@ function Canvas() {
               />
             </div>
           ))}
+          {drawingRect && (
+            <div
+              style={{
+                position: "absolute",
+                top: drawingRect.y,
+                left: drawingRect.x,
+                width: drawingRect.width,
+                height: drawingRect.height,
+                border: "2px dashed black"
+              }}
+            />
+          )}
         </>
       )}
     </div>
   );
 }
-
 export default Canvas;
