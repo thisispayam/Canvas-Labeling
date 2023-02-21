@@ -163,7 +163,7 @@ function Canvas() {
                   x
                 </div>
               </div>
-              <textarea
+              {/* <textarea
                 style={{
                   width: "100%",
                   height: "calc(100% - 24px)",
@@ -175,7 +175,7 @@ function Canvas() {
                 }}
                 value={rect.text}
                 onChange={event => handleTextChange(i, event)}
-              />
+              /> */}
             </div>
           ))}
           {drawingRect && (
