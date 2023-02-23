@@ -36,7 +36,7 @@ canvas {
   justify-content: space-between;
   align-items: center;
   padding: 4px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.5);
   color: #fff;
 }
 .side-items {
@@ -47,6 +47,7 @@ canvas {
 .side-item {
   display: flex;
   background: #1c1d22;
+  padding: 5px 0;
 }
 .side-num {
   padding: 10px;
@@ -58,6 +59,7 @@ canvas {
   margin: auto 10px;
   display: flex;
   justify-content: center;
+  border: 1px solid orange;
 }
 .side-input {
   background-color: transparent;
@@ -66,6 +68,4 @@ canvas {
   border-bottom: 0.5px dashed #fff;
   box-shadow: none;
   padding: 0 10px;
-}
-.side-button {
 }
