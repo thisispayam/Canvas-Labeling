@@ -125,14 +125,15 @@ function Canvas() {
   };
 
   return (
-    <div style={{ position: "relative" }}>
+    <main className="content" style={{ position: "relative" }}>
       <canvas ref={canvasRef} width={CANVAS_WIDTH} height={CANVAS_HEIGHT} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} style={{ zIndex: 0 }} />
       {canvasReady && (
-        <>
+        <section>
           {rectangles.map((rect, i) => (
             <div
               key={i}
               id={`rectDiv-${i}`}
+              className="selection-rect"
               style={{
                 position: "absolute",
                 zIndex: 1,
@@ -140,24 +141,12 @@ function Canvas() {
                 left: rect.x,
                 width: rect.width,
                 height: rect.height,
-                border: selected === i ? "2px solid orange" : "2px solid black",
+                border: selected === i ? "2px dashed orange" : "2px dashed #fff",
                 cursor: "move"
               }}
               onClick={() => handleRectClick(i)}
             >
-              <div
-                style={{
-                  display: "flex",
-                  position: "absolute",
-                  top: "-29px",
-                  left: "-2px",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  padding: "4px",
-                  backgroundColor: "rgba(0,0,0,0.5)",
-                  color: "#fff"
-                }}
-              >
+              <div className="number-label">
                 <div>{i + 1}</div>
                 <div style={{ cursor: "pointer", marginLeft: "20px" }} onClick={() => handleRectClose(i)}>
                   x
@@ -179,27 +168,33 @@ function Canvas() {
             </div>
           ))}
           {drawingRect && (
-            <div
-              style={{
-                position: "absolute",
-                top: drawingRect.y,
-                left: drawingRect.x,
-                width: drawingRect.width,
-                height: drawingRect.height,
-                border: "2px dashed grey"
-              }}
-            />
-          )}
-          {rectangles.map((rect, i) => (
-            <div key={i} onClick={() => handleRectClick(i)}>
-              <div>{i + 1}</div>
-              <input type="text" value={rect.text} onChange={event => handleTextChange(i, event)} />
-              <button onClick={() => handleRectClose(i)}>x</button>
+            <div className="sidebar">
+              <div
+                style={{
+                  position: "absolute",
+                  top: drawingRect.y,
+                  left: drawingRect.x,
+                  width: drawingRect.width,
+                  height: drawingRect.height,
+                  border: "2px dashed grey"
+                }}
+              />
             </div>
-          ))}
-        </>
+          )}
+          <div className="side-items">
+            {rectangles.map((rect, i) => (
+              <div key={i} className="side-item" onClick={() => handleRectClick(i)}>
+                <div className="side-num">{i + 1}</div>
+                <input className="side-input" type="text" value={rect.text} onChange={event => handleTextChange(i, event)} />
+                <button className="side-button" onClick={() => handleRectClose(i)}>
+                  x
+                </button>
+              </div>
+            ))}
+          </div>
+        </section>
       )}
-    </div>
+    </main>
   );
 }
 export default Canvas;

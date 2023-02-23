@@ -1,23 +1,69 @@
+body {
+  background-color: #161817;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+.content {
+  display: flex;
+  background-color: #161817;
+}
 canvas {
-  border: 1px solid #000;
   margin: 10px;
   cursor: pointer;
-}
-
-button {
-  margin: 10px;
-  padding: 5px;
-  background-color: #4caf50;
-  border: none;
+  background-color: #000;
   color: #fff;
+}
+
+.side-button {
+  margin: 10px;
+  background-color: transparent;
+  border: 1px solid #eee;
+  color: #eee;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #3e8e41;
+.side-button:hover {
+  background-color: #333;
 }
 
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+.number-label {
+  display: flex;
+  position: absolute;
+  top: -29px;
+  left: -2px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+.side-items {
+  background-color: #292c35;
+  height: 100%;
+}
+.side-item {
+  display: flex;
+  background: #1c1d22;
+}
+.side-num {
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  margin: auto 10px;
+  display: flex;
+  justify-content: center;
+}
+.side-input {
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  border-bottom: 0.5px dashed #fff;
+  box-shadow: none;
+  padding: 0 10px;
+}
+.side-button {
 }
