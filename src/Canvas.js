@@ -125,7 +125,7 @@ function Canvas() {
   };
 
   return (
-    <main className="content" style={{ position: "relative" }}>
+    <main className="content">
       <canvas ref={canvasRef} width={CANVAS_WIDTH} height={CANVAS_HEIGHT} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} style={{ zIndex: 0 }} />
       {canvasReady && (
         <section>
@@ -152,6 +152,7 @@ function Canvas() {
                   x
                 </div>
               </div>
+              {/* if you need to type inside the selection rectangles you can use the textarea here*/}
               {/* <textarea
                 style={{
                   width: "100%",
@@ -168,7 +169,7 @@ function Canvas() {
             </div>
           ))}
           {drawingRect && (
-            <div className="sidebar">
+            <section className="sidebar">
               <div
                 style={{
                   position: "absolute",
@@ -179,19 +180,19 @@ function Canvas() {
                   border: "2px dashed grey"
                 }}
               />
-            </div>
+            </section>
           )}
-          <div className="side-items">
+          <aside className="side-items">
             {rectangles.map((rect, i) => (
-              <div key={i} className="side-item" onClick={() => handleRectClick(i)}>
+              <section key={i} className="side-item" onClick={() => handleRectClick(i)}>
                 <div className="side-num">{i + 1}</div>
                 <input className="side-input" type="text" value={rect.text} onChange={event => handleTextChange(i, event)} />
                 <button className="side-button" onClick={() => handleRectClose(i)}>
                   x
                 </button>
-              </div>
+              </section>
             ))}
-          </div>
+          </aside>
         </section>
       )}
     </main>
