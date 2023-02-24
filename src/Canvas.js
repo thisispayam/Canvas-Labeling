@@ -110,18 +110,22 @@ function Canvas() {
   };
 
   const handleTextChange = (index, event) => {
-    setRectangles(
-      rectangles.map((rect, i) => {
-        if (i === index) {
-          return {
-            ...rect,
-            text: event.target.value
-          };
-        } else {
-          return rect;
-        }
-      })
-    );
+    const newValue = event.target.value;
+    if (/^\d{0,2}$/.test(newValue)) {
+      // allow only digits with length <= 2
+      setRectangles(
+        rectangles.map((rect, i) => {
+          if (i === index) {
+            return {
+              ...rect,
+              text: newValue
+            };
+          } else {
+            return rect;
+          }
+        })
+      );
+    }
   };
 
   return (
@@ -147,25 +151,13 @@ function Canvas() {
               onClick={() => handleRectClick(i)}
             >
               <div className="number-label">
-                <div>{i + 1}</div>
-                <div style={{ cursor: "pointer", marginLeft: "20px" }} onClick={() => handleRectClose(i)}>
+                <div class="num">
+                  <input type="number" value={rect.text} onChange={event => handleTextChange(i, event)} min={0} max={99} />
+                </div>
+                <div style={{ cursor: "pointer", marginLeft: "10px" }} onClick={() => handleRectClose(i)}>
                   x
                 </div>
               </div>
-              {/* if you need to type inside the selection rectangles you can use the textarea here*/}
-              {/* <textarea
-                style={{
-                  width: "100%",
-                  height: "calc(100% - 24px)",
-                  border: "none",
-                  padding: "4px",
-                  resize: "none",
-                  outline: "none",
-                  backgroundColor: "transparent"
-                }}
-                value={rect.text}
-                onChange={event => handleTextChange(i, event)}
-              /> */}
             </div>
           ))}
           {drawingRect && (
@@ -185,8 +177,10 @@ function Canvas() {
           <aside className="side-items">
             {rectangles.map((rect, i) => (
               <section key={i} className="side-item" onClick={() => handleRectClick(i)}>
-                <div className="side-num">{i + 1}</div>
-                <input className="side-input" type="text" value={rect.text} onChange={event => handleTextChange(i, event)} />
+                <div className="side-num num">
+                  <input type="number" value={rect.text} onChange={event => handleTextChange(i, event)} min={0} max={99} />
+                </div>
+                <input className="side-input" type="text" />
                 <button className="side-button" onClick={() => handleRectClose(i)}>
                   x
                 </button>

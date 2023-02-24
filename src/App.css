@@ -69,3 +69,34 @@ canvas {
   box-shadow: none;
   padding: 0 10px;
 }
+
+.num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.num input {
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  color: #fff;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.num input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.num input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.desc {
+  color: #fff;
+  margin: 20px;
+}
