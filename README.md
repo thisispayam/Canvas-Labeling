@@ -1,3 +1,12 @@
+# Description
+
+•	POC of drawing rectangle polygons on a Canvas. Each polygon comes with a number field on top. It only accepts 2-digit numbers.
+•	Each rectangle will generate another field on the right-side panel which the number labels for both are synced.
+•	You can also write a short description for each rectangle on the side panel. 
+•	You can drag and drop them anywhere in the canvas.
+•	You can delete the rectangle either by clicking on the "x" on top of it or from the side panel.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
