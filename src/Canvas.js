@@ -9,6 +9,7 @@ function Canvas() {
 
   const [canvasReady, setCanvasReady] = useState(false);
   const [drawingRect, setDrawingRect] = useState(null);
+  const [dragging, setDragging] = useState(null);
 
   const canvasRef = useRef();
   const mouseRef = useRef({ x: 0, y: 0 });
@@ -97,6 +98,26 @@ function Canvas() {
       rectDiv.style.border = "2px solid orange";
     }
   };
+  const handleDragStart = (event, index) => {
+    event.dataTransfer.setData("text/plain", index);
+    setDragging(index);
+  };
+
+  const handleDragOver = event => {
+    event.preventDefault();
+  };
+
+  const handleDrop = event => {
+    event.preventDefault();
+    if (dragging === null) {
+      return;
+    }
+    const rect = rectangles[dragging];
+    const rectLeft = event.nativeEvent.offsetX - rect.width / 2;
+    const rectTop = event.nativeEvent.offsetY - rect.height / 2;
+    setRectangles(rectangles.map((r, i) => (i === dragging ? { ...r, x: rectLeft, y: rectTop } : r)));
+    setDragging(null);
+  };
 
   const handleRectClose = index => {
     setRectangles(rectangles.filter((_, i) => i !== index));
@@ -130,7 +151,7 @@ function Canvas() {
 
   return (
     <main className="content">
-      <canvas ref={canvasRef} width={CANVAS_WIDTH} height={CANVAS_HEIGHT} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} style={{ zIndex: 0 }} />
+      <canvas ref={canvasRef} width={CANVAS_WIDTH} height={CANVAS_HEIGHT} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onDragOver={handleDragOver} onDrop={handleDrop} style={{ zIndex: 0 }} />{" "}
       {canvasReady && (
         <section>
           {rectangles.map((rect, i) => (
@@ -149,6 +170,8 @@ function Canvas() {
                 cursor: "move"
               }}
               onClick={() => handleRectClick(i)}
+              draggable="true"
+              onDragStart={event => handleDragStart(event, i)}
             >
               <div className="number-label">
                 <div class="num">
