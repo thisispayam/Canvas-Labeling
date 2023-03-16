@@ -164,71 +164,73 @@ function Canvas() {
   };
 
   return (
-    <main className="content">
-      <canvas ref={canvasRef} width={CANVAS_WIDTH} height={CANVAS_HEIGHT} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onDragOver={handleDragOver} onDrop={handleDrop} />
-      <input type="file" accept="image/*" onChange={handleImageUpload} />
+    <>
+      <main className="content">
+        <canvas ref={canvasRef} width={CANVAS_WIDTH} height={CANVAS_HEIGHT} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onDragOver={handleDragOver} onDrop={handleDrop} />
 
-      {canvasReady && (
-        <section>
-          {rectangles.map((rect, i) => (
-            <div
-              key={i}
-              id={`rectDiv-${i}`}
-              className="selection-rect"
-              style={{
-                position: "absolute",
-                zIndex: 1,
-                top: rect.y,
-                left: rect.x,
-                width: rect.width,
-                height: rect.height,
-                border: selected === i ? "2px dashed orange" : "2px dashed #fff",
-                cursor: "move"
-              }}
-              onClick={() => handleRectClick(i)}
-              draggable="true"
-              onDragStart={event => handleDragStart(event, i)}
-            >
-              <div className="number-label">
-                <div class="num">
-                  <input type="number" value={rect.text} onChange={event => handleTextChange(i, event)} min={0} max={99} />
-                </div>
-                <div style={{ cursor: "pointer", marginLeft: "10px" }} onClick={() => handleRectClose(i)}>
-                  x
-                </div>
-              </div>
-            </div>
-          ))}
-          {drawingRect && (
-            <section className="sidebar">
+        {canvasReady && (
+          <section>
+            {rectangles.map((rect, i) => (
               <div
+                key={i}
+                id={`rectDiv-${i}`}
+                className="selection-rect"
                 style={{
                   position: "absolute",
-                  top: drawingRect.y,
-                  left: drawingRect.x,
-                  width: drawingRect.width,
-                  height: drawingRect.height,
-                  border: "2px dashed grey"
+                  zIndex: 1,
+                  top: rect.y,
+                  left: rect.x,
+                  width: rect.width,
+                  height: rect.height,
+                  border: selected === i ? "2px dashed orange" : "2px dashed #fff",
+                  cursor: "move"
                 }}
-              />
-            </section>
-          )}
-          <aside className="side-items">
-            {rectangles.map((rect, i) => (
-              <section key={i} className="side-item" onClick={() => handleRectClick(i)}>
-                <div className="side-num num">
-                  <input type="number" value={rect.text} onChange={event => handleTextChange(i, event)} min={0} max={99} />
+                onClick={() => handleRectClick(i)}
+                draggable="true"
+                onDragStart={event => handleDragStart(event, i)}
+              >
+                <div className="number-label">
+                  <div class="num">
+                    <input type="number" value={rect.text} onChange={event => handleTextChange(i, event)} min={0} max={99} />
+                  </div>
+                  <div style={{ cursor: "pointer", marginLeft: "10px" }} onClick={() => handleRectClose(i)}>
+                    x
+                  </div>
                 </div>
-                <input className="side-input" type="text" />
-                <button className="side-button" onClick={() => handleRectClose(i)}>
-                  x
-                </button>
-              </section>
+              </div>
             ))}
-          </aside>
-        </section>
-      )}
-    </main>
+            {drawingRect && (
+              <section className="sidebar">
+                <div
+                  style={{
+                    position: "absolute",
+                    top: drawingRect.y,
+                    left: drawingRect.x,
+                    width: drawingRect.width,
+                    height: drawingRect.height,
+                    border: "2px dashed grey"
+                  }}
+                />
+              </section>
+            )}
+            <aside className="side-items">
+              {rectangles.map((rect, i) => (
+                <section key={i} className="side-item" onClick={() => handleRectClick(i)}>
+                  <div className="side-num num">
+                    <input type="number" value={rect.text} onChange={event => handleTextChange(i, event)} min={0} max={99} />
+                  </div>
+                  <input className="side-input" type="text" />
+                  <button className="side-button" onClick={() => handleRectClose(i)}>
+                    x
+                  </button>
+                </section>
+              ))}
+            </aside>
+          </section>
+        )}
+      </main>
+      <input type="file" accept="image/*" onChange={handleImageUpload} />
+    </>
   );
 }
 export default Canvas;
