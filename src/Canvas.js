@@ -149,9 +149,25 @@ function Canvas() {
     }
   };
 
+  const handleImageUpload = e => {
+    const fileReader = new FileReader();
+    fileReader.onload = event => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+      };
+      img.src = event.target.result;
+    };
+    fileReader.readAsDataURL(e.target.files[0]);
+  };
+
   return (
     <main className="content">
-      <canvas ref={canvasRef} width={CANVAS_WIDTH} height={CANVAS_HEIGHT} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onDragOver={handleDragOver} onDrop={handleDrop} style={{ zIndex: 0 }} />{" "}
+      <canvas ref={canvasRef} width={CANVAS_WIDTH} height={CANVAS_HEIGHT} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onDragOver={handleDragOver} onDrop={handleDrop} />
+      <input type="file" accept="image/*" onChange={handleImageUpload} />
+
       {canvasReady && (
         <section>
           {rectangles.map((rect, i) => (
